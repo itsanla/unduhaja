@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large WASM binaries (auto-copied from node_modules via postinstall)
+public/pandoc.wasm

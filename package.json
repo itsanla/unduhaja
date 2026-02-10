@@ -6,21 +6,47 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "pages:build": "next build",
+    "pages:deploy": "next build && wrangler pages deploy out",
+    "preview": "wrangler pages dev out",
+    "postinstall": "cp node_modules/pandoc-wasm/src/pandoc.wasm public/pandoc.wasm 2>/dev/null || true"
   },
   "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
+    "@heroicons/react": "2.2.0",
+    "fflate": "^0.8.2",
+    "html2canvas": "^1.4.1",
     "next": "16.1.6",
+    "pandoc-wasm": "^1.0.1",
+    "pdfjs-dist": "^5.4.624",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-dropzone": "^14.4.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/jsdom": "^27.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.1.4",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "happy-dom": "^20.6.0",
+    "jsdom": "^28.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.18",
+    "wrangler": "^4.63.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "workerd"
+    ]
   }
 }
