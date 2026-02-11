@@ -22,7 +22,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="p-10 pb-5 md:pt-10">
+    <footer className="px-4 md:px-6 lg:px-12 xl:px-16 py-10 pb-5 md:pt-10">
       <div className="container mx-auto flex flex-col">
         {/* CTA Banner */}
         <div

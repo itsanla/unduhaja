@@ -39,6 +39,7 @@ export const DOCUMENT_FORMATS: FormatOption[] = [
   { value: "txt", label: "TXT", mime: "text/plain", ext: "txt" },
   { value: "html", label: "HTML", mime: "text/html", ext: "html" },
   { value: "md", label: "Markdown", mime: "text/markdown", ext: "md" },
+  { value: "pdf", label: "PDF", mime: "application/pdf", ext: "pdf" },
   { value: "jpg-pages", label: "JPG (screenshot)", mime: "image/jpeg", ext: "jpg" },
   { value: "png-pages", label: "PNG (screenshot)", mime: "image/png", ext: "png" },
   { value: "webp-pages", label: "WEBP (screenshot)", mime: "image/webp", ext: "webp" },

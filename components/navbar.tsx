@@ -36,10 +36,12 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 z-50 w-full border-0 transition-all duration-300 ${
-        isScrolling ? "bg-white shadow-md" : "bg-transparent"
+        isScrolling
+          ? "bg-white/40 shadow-lg backdrop-blur-xl backdrop-saturate-200"
+          : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4 py-3">
+      <div className="container mx-auto flex items-center justify-between px-4 md:px-6 lg:px-12 xl:px-16 py-3">
         <a
           href="#"
           className={`text-lg font-bold ${

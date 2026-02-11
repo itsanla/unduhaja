@@ -1,16 +1,17 @@
 // Document conversion router
-// Routes document conversions through Pandoc WASM for high-quality results.
+// Routes document conversions through the best available engine per route.
 //
 // Architecture:
 //  - DOCX ↔ HTML ↔ TXT ↔ Markdown: Pure Pandoc (excellent quality, ≥90%)
+//  - DOCX → PDF: docx-preview → html2canvas → jsPDF (~85-90%)
 //  - PDF → JPG: pdfjs-dist canvas rendering (pixel-perfect, ~90%)
 //  - DOCX/HTML/TXT/MD → JPG/PNG/WEBP: Pandoc→HTML→html2canvas screenshot (~85-90%)
 //  - PDF → text-based formats: REMOVED (accuracy <50%, planned for future)
-//  - → PDF output: REMOVED (accuracy <80%, planned for future)
 
 import { pandocConvert, canPandocConvertDirect } from "./pandoc-engine";
 import { pdfToJpg } from "./pdf-to-jpg";
 import { docToImage, isDocImageFormat } from "./doc-to-image";
+import { docToPdf, isDocToPdf } from "./doc-to-pdf";
 
 export async function convertDocument(
   file: File,
@@ -39,6 +40,11 @@ export async function convertDocument(
       "Saat ini PDF hanya dapat dikonversi ke JPG. " +
       "Konversi PDF ke format teks akan tersedia di versi mendatang."
     );
+  }
+
+  // ── DOCX → PDF (docx-preview → html2canvas → jsPDF, ~85-90%) ──
+  if (isDocToPdf(fromExt, toFormat)) {
+    return docToPdf(file, onProgress);
   }
 
   // ── Document → Image screenshot (DOCX/HTML/TXT/MD → JPG/PNG/WEBP) ──

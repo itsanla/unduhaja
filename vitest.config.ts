@@ -31,6 +31,16 @@ export default defineConfig({
         __dirname,
         "__tests__/mocks/html2canvas.ts"
       ),
+      // Mock docx-preview (needs a real browser DOM)
+      "docx-preview": path.resolve(
+        __dirname,
+        "__tests__/mocks/docx-preview.ts"
+      ),
+      // Mock jspdf (heavy PDF generation library)
+      "jspdf": path.resolve(
+        __dirname,
+        "__tests__/mocks/jspdf.ts"
+      ),
     },
   },
 });

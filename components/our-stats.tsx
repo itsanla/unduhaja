@@ -1,29 +1,64 @@
 "use client";
 
 import StatsCard from "@/components/stats-card";
+import { NumberTicker } from "@/components/ui/number-ticker";
 
 const STATS = [
   {
-    count: "10.000+",
-    title: "Pengguna Aktif",
+    count: (
+      <>
+        <NumberTicker
+          value={1000}
+          className="text-inherit dark:text-inherit"
+        />
+        +
+      </>
+    ),
+    title: "Pengguna",
   },
   {
-    count: "500.000+",
+    count: (
+      <>
+        <NumberTicker
+          value={5000}
+          className="text-inherit dark:text-inherit"
+        />
+        +
+      </>
+    ),
     title: "File Diproses",
   },
   {
-    count: "100%",
+    count: (
+      <>
+        <NumberTicker
+          value={100}
+          className="text-inherit dark:text-inherit"
+        />
+        %
+      </>
+    ),
     title: "Privasi Terjamin",
   },
   {
-    count: "Rp 0",
-    title: "Gratis Selamanya",
+    count: (
+      <>
+        Rp{" "}
+        <NumberTicker
+          value={0}
+          startValue={100000}
+          direction="up"
+          className="text-inherit dark:text-inherit"
+        />
+      </>
+    ),
+    title: "Gratis Tanpa Batas",
   },
 ];
 
 export default function OurStats() {
   return (
-    <section className="container mx-auto grid gap-10 px-8 py-44 lg:grid-cols-1 lg:gap-20 xl:grid-cols-2 xl:place-items-center">
+    <section className="container mx-auto grid gap-10 px-4 md:px-6 lg:px-12 xl:px-16 py-15 lg:grid-cols-1 lg:gap-20 xl:grid-cols-2 xl:place-items-center">
       <div>
         <p className="mb-6 text-sm font-semibold uppercase tracking-wider text-orange-500">
           Statistik Kami

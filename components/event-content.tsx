@@ -36,7 +36,7 @@ export default function EventContent() {
   const [activeTab, setActiveTab] = React.useState(0);
 
   return (
-    <section id="layanan" className="py-8 px-8 lg:py-20">
+    <section id="layanan">
       {/* Tabs */}
       <div className="mb-8 flex w-full flex-col items-center">
         <div className="flex h-12 w-72 items-center rounded-lg bg-blue-gray-50 p-1 md:w-[28rem]">
@@ -56,7 +56,7 @@ export default function EventContent() {
         </div>
       </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-16 py-10 lg:grid-cols-1 lg:gap-20 xl:grid-cols-2 xl:place-items-center">
         {EVENT_CONTENT.map((props, idx) => (
           <EventContentCard key={idx} {...props} />
         ))}

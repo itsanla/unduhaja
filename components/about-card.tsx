@@ -1,17 +1,55 @@
+import Image from "next/image";
+import { ShinyButton } from "@/components/ui/shiny-button"
+import { Compare } from "@/components/ui/compare";
+
 interface AboutCardProps {
   title: string;
   subTitle: string;
   description: string;
+  img?: string;
+  compareImages?: {
+    before: string;
+    after: string;
+  };
 }
 
 export default function AboutCard({
   title,
   description,
   subTitle,
+  img,
+  compareImages,
 }: AboutCardProps) {
   return (
-    <div className="rounded-2xl bg-gray-900 shadow-none">
-      <div className="flex h-[453px] flex-col items-center justify-center rounded-2xl p-5">
+    <div className="rounded-2xl bg-gray-900 shadow-none relative overflow-hidden h-[453px]">
+      {compareImages ? (
+        <>
+          <div className="absolute inset-0 z-0">
+            <Compare
+              firstImage={compareImages.before}
+              secondImage={compareImages.after}
+              firstImageClassName="object-cover"
+              secondImageClassname="object-cover"
+              className="w-full h-full"
+              slideMode="hover"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gray-900/70 z-[1] pointer-events-none" />
+        </>
+      ) : (
+        img && (
+          <>
+            <Image
+              src={img}
+              alt={title}
+              fill
+              className="object-cover z-0"
+            />
+            <div className="absolute inset-0 bg-gray-900/70 z-[1]" />
+          </>
+        )
+      )}
+      <div className="flex h-full flex-col items-center justify-center rounded-2xl p-5 relative z-[2] pointer-events-none">
         <p className="mb-4 text-center text-sm font-semibold uppercase tracking-wider text-white/80">
           {subTitle}
         </p>
@@ -23,9 +61,9 @@ export default function AboutCard({
         </p>
         <a
           href="/converter"
-          className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-100"
+          className="rounded-lg bg-white pointer-events-auto"
         >
-          Coba Sekarang
+          <ShinyButton>Coba Sekarang</ShinyButton>
         </a>
       </div>
     </div>

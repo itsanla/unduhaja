@@ -234,9 +234,63 @@ describe("PDF conversion restrictions", () => {
     );
   });
 
-  it("should reject TXT → PDF (not yet supported)", async () => {
+  it("should reject TXT → PDF (not supported)", async () => {
     const { convertDocument } = await import("@/lib/converter/doc/index");
     const file = mockFile("sample.txt", "Hello");
+
+    await expect(convertDocument(file, "pdf", noop)).rejects.toThrow(
+      /belum didukung/
+    );
+  });
+});
+
+// ─── DOCX → PDF (docx-preview + html2canvas + jsPDF) ──────
+
+describe("DOCX → PDF conversion", () => {
+  it("should convert DOCX → PDF", async () => {
+    const { convertDocument } = await import("@/lib/converter/doc/index");
+    const file = mockFile(
+      "doc.docx",
+      "PDF conversion content",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    );
+    const progress = vi.fn();
+
+    const result = await convertDocument(file, "pdf", progress);
+
+    expect(result.ext).toBe("pdf");
+    expect(result.blob.size).toBeGreaterThan(0);
+    expect(result.blob.type).toBe("application/pdf");
+    // PDF files start with %PDF
+    const header = new Uint8Array(await result.blob.slice(0, 4).arrayBuffer());
+    expect(header[0]).toBe(0x25); // %
+    expect(header[1]).toBe(0x50); // P
+    expect(header[2]).toBe(0x44); // D
+    expect(header[3]).toBe(0x46); // F
+  });
+
+  it("should report progress during DOCX → PDF conversion", async () => {
+    const { convertDocument } = await import("@/lib/converter/doc/index");
+    const file = mockFile(
+      "report.docx",
+      "Progress test",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    );
+    const progress = vi.fn();
+
+    await convertDocument(file, "pdf", progress);
+
+    // Should have called progress multiple times
+    expect(progress).toHaveBeenCalled();
+    const calls = progress.mock.calls.map((c: number[]) => c[0]);
+    // Should start low and end at 100
+    expect(calls[0]).toBeLessThanOrEqual(10);
+    expect(calls[calls.length - 1]).toBe(100);
+  });
+
+  it("should reject HTML → PDF (only DOCX source supported for PDF)", async () => {
+    const { convertDocument } = await import("@/lib/converter/doc/index");
+    const file = mockFile("page.html", "<p>Hello</p>", "text/html");
 
     await expect(convertDocument(file, "pdf", noop)).rejects.toThrow(
       /belum didukung/

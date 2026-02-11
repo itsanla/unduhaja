@@ -4,16 +4,18 @@ import AboutCard from "@/components/about-card";
 
 const EVENT_INFO = [
   {
-    title: "Privasi 100% Terjamin",
+    title: "Pengubah File Universal",
     description:
-      "File Anda tidak pernah dikirim ke server manapun. Semua proses konversi, transkripsi, dan editing terjadi langsung di browser Anda sendiri — aman dan privat.",
-    subTitle: "Keamanan",
+      "Alat untuk mengubah format file apa saja menjadi format yang diinginkan. Dokumen, gambar, hingga video bisa diubah dalam hitungan detik",
+    subTitle: "File Converter",
+    img: "/converter.webp",
   },
   {
-    title: "Gratis & Tanpa Batasan",
+    title: "Pencatat Suara Otomatis",
     description:
-      "Tidak ada limit jumlah file, tidak ada biaya langganan. Karena semua diproses di perangkat Anda, kami tidak memerlukan server mahal — jadi semuanya gratis selamanya.",
-    subTitle: "Akses Bebas",
+      "Pengguna cukup mengunggah rekaman suara, dan website kami akan otomatis mengetikkannya menjadi teks yang rapi. Sangat membantu untuk notulen rapat, transkrip wawancara, atau tugas kuliah.",
+    subTitle: "Audio to Text",
+    img: "/audio.webp",
   },
 ];
 
@@ -21,7 +23,7 @@ export default function AboutEvent() {
   return (
     <section
       id="tentang"
-      className="container mx-auto flex flex-col items-center px-4 py-10"
+      className="container mx-auto flex flex-col items-center px-4 md:px-6 lg:px-12 xl:px-16 py-10"
     >
       <p className="mb-2 text-center text-sm font-semibold uppercase tracking-wider text-orange-500">
         Tentang Kami
@@ -47,9 +49,13 @@ export default function AboutEvent() {
         ))}
         <div className="md:col-span-2">
           <AboutCard
-            title="Tidak Perlu Install Aplikasi"
-            subTitle="Kemudahan"
-            description="Cukup buka website unduhaja.me di browser manapun — Chrome, Safari, Firefox — dan langsung gunakan semua alat digital kami. Tanpa download, tanpa registrasi, tanpa ribet."
+            title="Penghapus Latar Belakang Foto"
+            subTitle="Background Remover"
+            description="Cukup satu klik, latar belakang foto hilang otomatis. Objek utama (orang/barang) terpotong rapi, siap dipakai untuk desain, jualan online, atau pas foto. Hasil berkualitas tinggi tanpa perlu skill editing."
+            compareImages={{
+              before: "/rb2.webp",
+              after: "/rb.webp",
+            }}
           />
         </div>
       </div>

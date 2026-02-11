@@ -12,6 +12,8 @@
 //  - DOCX/HTML/TXT/Markdown conversions → Pandoc directly
 //  - PDF → JPG handled separately via pdfjs-dist (not through Pandoc)
 
+import { DOCUMENT_FULL_CSS } from "./document-css";
+
 // ── Types ──
 interface PandocConvertResult {
   stdout: string;
@@ -278,6 +280,22 @@ function embedMediaInText(
   return text;
 }
 
+/**
+ * Inject the document stylesheet into a Pandoc standalone HTML output.
+ * Inserts a <style> block into the <head>, or prepends it if no <head> found.
+ */
+function injectHtmlStylesheet(html: string): string {
+  const styleBlock = `<style>\n${DOCUMENT_FULL_CSS}\n</style>`;
+
+  // Try to insert before </head>
+  if (/<\/head>/i.test(html)) {
+    return html.replace(/<\/head>/i, `${styleBlock}\n</head>`);
+  }
+
+  // Fallback: prepend to the document
+  return `${styleBlock}\n${html}`;
+}
+
 // ── Core conversion function ──
 
 /**
@@ -363,6 +381,11 @@ export async function pandocConvert(
       const embedFormat = pandocTo === "html" ? "html"
         : (pandocTo === "markdown" ? "markdown" : "plain");
       outputText = embedMediaInText(outputText, mediaMap, embedFormat);
+    }
+
+    // Inject document stylesheet into standalone HTML output
+    if (pandocTo === "html") {
+      outputText = injectHtmlStylesheet(outputText);
     }
 
     const mimeMap: Record<string, string> = {
@@ -503,12 +526,19 @@ export async function pandocConvertHtml(
   if (isBinaryOutput && outputFilename && result.files[outputFilename]) {
     outputBlob = result.files[outputFilename];
   } else if (result.stdout) {
+    let outputText = result.stdout;
+
+    // Inject document stylesheet for HTML output
+    if (pandocTo === "html") {
+      outputText = injectHtmlStylesheet(outputText);
+    }
+
     const mimeMap: Record<string, string> = {
       html: "text/html",
       plain: "text/plain",
       markdown: "text/markdown",
     };
-    outputBlob = new Blob([result.stdout], {
+    outputBlob = new Blob([outputText], {
       type: mimeMap[pandocTo] || "application/octet-stream",
     });
   } else {

@@ -1,5 +1,5 @@
 interface StatsCardProps {
-  count: string;
+  count: React.ReactNode;
   title: string;
 }
 
