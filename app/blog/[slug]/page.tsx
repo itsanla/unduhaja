@@ -57,6 +57,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             src={post.frontmatter.image}
             alt={post.frontmatter.title}
             className="h-full w-full object-cover opacity-40"
+            decoding="async"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-gray-900/40" />
         </div>
@@ -78,6 +80,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 width={28}
                 height={28}
                 className="rounded-lg"
+                decoding="async"
               />
               <span className="text-lg font-bold text-white">
                 unduhaja.me
@@ -169,6 +172,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                           alt={related.frontmatter.title}
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           loading="lazy"
+                          decoding="async"
                         />
                       </div>
                       <div className="p-5">

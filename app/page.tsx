@@ -1,9 +1,6 @@
 import dynamic from "next/dynamic";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
-import AboutEvent from "@/components/about-event";
-import OurStats from "@/components/our-stats";
-import HeroScrollDemo from "@/components/peformance";
 import { getAllPosts } from "@/lib/blog";
 
 import {
@@ -11,11 +8,23 @@ import {
   EventContentSkeleton,
   FaqSkeleton,
   FooterSkeleton,
+  AboutEventSkeleton,
+  OurStatsSkeleton,
+  HeroScrollSkeleton,
 } from "@/components/skeletons";
 
 // Lazy-load below-fold & heavy components with skeleton fallbacks
 const SponsoredBy = dynamic(() => import("@/components/sponsored-by"), {
   loading: () => <SponsoredBySkeleton />,
+});
+const AboutEvent = dynamic(() => import("@/components/about-event"), {
+  loading: () => <AboutEventSkeleton />,
+});
+const OurStats = dynamic(() => import("@/components/our-stats"), {
+  loading: () => <OurStatsSkeleton />,
+});
+const HeroScrollDemo = dynamic(() => import("@/components/peformance"), {
+  loading: () => <HeroScrollSkeleton />,
 });
 const EventContent = dynamic(() => import("@/components/event-content"), {
   loading: () => <EventContentSkeleton />,

@@ -42,17 +42,18 @@ export const ShinyButton = React.forwardRef<
   }
 
   return (
-    <motion.button
+    <motion.span
       ref={(node) => {
-        buttonRef.current = node
+        buttonRef.current = node as HTMLButtonElement | null
         if (typeof ref === 'function') {
-          ref(node)
+          ref(node as HTMLButtonElement | null)
         } else if (ref) {
-          ref.current = node
+          ref.current = node as HTMLButtonElement | null
         }
       }}
+      role="presentation"
       className={cn(
-        "relative cursor-pointer rounded-lg border px-6 py-2 font-medium backdrop-blur-xl transition-shadow duration-300 ease-in-out hover:shadow dark:bg-[radial-gradient(circle_at_50%_0%,var(--primary)/10%_0%,transparent_60%)] dark:hover:shadow-[0_0_20px_var(--primary)/10%]",
+        "relative cursor-pointer rounded-lg border px-6 py-3 font-medium backdrop-blur-xl transition-shadow duration-300 ease-in-out hover:shadow dark:bg-[radial-gradient(circle_at_50%_0%,var(--primary)/10%_0%,transparent_60%)] dark:hover:shadow-[0_0_20px_var(--primary)/10%]",
         className
       )}
       {...animationProps}
@@ -77,7 +78,7 @@ export const ShinyButton = React.forwardRef<
         }}
         className="absolute inset-0 z-10 block rounded-[inherit] p-px"
       />
-    </motion.button>
+    </motion.span>
   )
 })
 

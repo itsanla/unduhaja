@@ -104,6 +104,7 @@ const components = {
     <img
       className="my-6 w-full rounded-xl shadow-md"
       loading="lazy"
+      decoding="async"
       {...props}
     />
   ),

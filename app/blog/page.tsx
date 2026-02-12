@@ -53,6 +53,7 @@ export default function BlogPage() {
                   width={28}
                   height={28}
                   className="rounded-lg"
+                  decoding="async"
                 />
                 <span className="text-lg font-bold text-white">
                   unduhaja.me

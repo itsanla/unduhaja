@@ -55,15 +55,16 @@ export default function AboutCard({
         <p className="mb-4 text-center text-sm font-semibold uppercase tracking-wider text-white/80">
           {subTitle}
         </p>
-        <h4 className="text-center text-2xl font-bold text-white">
+        <h3 className="text-center text-2xl font-bold text-white">
           {title}
-        </h4>
+        </h3>
         <p className="mt-2 mb-10 w-full text-center text-base font-normal text-white/80 lg:w-8/12">
           {description}
         </p>
         <a
           href={href}
-          className="rounded-lg bg-white pointer-events-auto"
+          className="rounded-lg bg-white pointer-events-auto inline-flex items-center min-h-[48px]"
+          aria-label={`Coba Sekarang - ${title}`}
         >
           <ShinyButton>Coba Sekarang</ShinyButton>
         </a>

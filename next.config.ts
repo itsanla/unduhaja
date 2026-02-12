@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    optimizePackageImports: [
+      "@heroicons/react/24/solid",
+      "@heroicons/react/24/outline",
+      "@tabler/icons-react",
+      "lucide-react",
+      "motion",
+    ],
+  },
   // Allow importing pandoc-wasm's core module (not exported via package.json "exports")
   webpack: (config) => {
     config.resolve = config.resolve || {};

@@ -46,10 +46,11 @@ export default function Navbar() {
           <a href="/" className="flex items-center gap-2">
             <img
               src="/icon.webp"
-              alt="unduhaja.me"
+              alt=""
               width={30}
               height={30}
               className="rounded-lg"
+              decoding="async"
             />
             <span className="text-lg font-bold">
               unduhaja.me
@@ -74,10 +75,11 @@ export default function Navbar() {
             <a href="/" className="flex items-center gap-2">
               <img
                 src="/icon.webp"
-                alt="unduhaja.me"
+                alt=""
                 width={30}
                 height={30}
                 className="rounded-lg"
+                decoding="async"
               />
               <span className="text-lg font-bold text-black dark:text-white">
                 unduhaja.me

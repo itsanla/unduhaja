@@ -22,14 +22,15 @@ export default function Hero() {
             dilakukan langsung di browser Anda. Cepat, aman, dan 100% gratis
             tanpa batasan.
           </p>
-            <InteractiveHoverButton>
-              <a
-                href="/converter"
-                className="px-6 py-3 text-lg"
-                >
-                  Coba Sekarang
-              </a>
-            </InteractiveHoverButton>
+            <a
+              href="/converter"
+              className="inline-flex items-center min-h-[48px]"
+              aria-label="Coba Sekarang - Mulai konversi file"
+            >
+              <InteractiveHoverButton>
+                <span className="px-6 py-3 text-lg">Coba Sekarang</span>
+              </InteractiveHoverButton>
+            </a>
         </div>
       </div>
     </div>

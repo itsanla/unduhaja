@@ -27,12 +27,12 @@ export default function AboutEvent() {
       id="tentang"
       className="container mx-auto flex flex-col items-center px-4 md:px-6 lg:px-12 xl:px-16 py-10"
     >
-      <p className="mb-2 text-center text-sm font-semibold uppercase tracking-wider text-orange-500">
+      <p className="mb-2 text-center text-sm font-semibold uppercase tracking-wider text-orange-700">
         Tentang Kami
       </p>
-      <h3 className="text-center text-3xl font-bold text-blue-gray-900">
+      <h2 className="text-center text-3xl font-bold text-blue-gray-900">
         Kenapa Memilih unduhaja.me?
-      </h3>
+      </h2>
       <p className="mt-2 mb-8 w-full text-center text-lg font-normal text-gray-500 lg:max-w-4xl">
         Kami membuat sebuah website &quot;serba bisa&quot; yang menyediakan
         alat-alat digital untuk mempermudah pekerjaan sehari-hari. Di kembangkan khusus dalam mengolah dokumen, foto, dan suara. Yang membuat kami berbeda adalah semua
@@ -44,7 +44,7 @@ export default function AboutEvent() {
         konten kreator yang butuh alat praktis tanpa ribet install aplikasi.
       </p>
       <div id="layanan" className="w-full mt-8">
-        <p className="mb-6 text-sm font-semibold uppercase tracking-wider text-orange-500">
+        <p className="mb-6 text-sm font-semibold uppercase tracking-wider text-orange-700">
           Layanan Kami
         </p>
         <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
