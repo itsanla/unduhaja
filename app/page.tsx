@@ -3,6 +3,9 @@ import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
 import AboutEvent from "@/components/about-event";
 import OurStats from "@/components/our-stats";
+import HeroScrollDemo from "@/components/peformance";
+import { getAllPosts } from "@/lib/blog";
+
 import {
   SponsoredBySkeleton,
   EventContentSkeleton,
@@ -25,6 +28,13 @@ const Footer = dynamic(() => import("@/components/footer"), {
 });
 
 export default function Home() {
+  const latestPosts = getAllPosts().slice(0, 6).map((post) => ({
+    category: post.frontmatter.categories?.[0] || "Artikel",
+    title: post.frontmatter.title,
+    src: post.frontmatter.image || "/image/event.webp",
+    href: `/blog/${post.slug}`,
+  }));
+
   return (
     <>
       <Navbar />
@@ -32,7 +42,8 @@ export default function Home() {
       <SponsoredBy />
       <AboutEvent />
       <OurStats />
-      <EventContent />
+      <HeroScrollDemo/>
+      <EventContent posts={latestPosts} />
       <Faq />
       <Footer />
     </>

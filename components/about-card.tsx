@@ -11,6 +11,7 @@ interface AboutCardProps {
     before: string;
     after: string;
   };
+  href?: string;
 }
 
 export default function AboutCard({
@@ -19,6 +20,7 @@ export default function AboutCard({
   subTitle,
   img,
   compareImages,
+  href = "/converter",
 }: AboutCardProps) {
   return (
     <div className="rounded-2xl bg-gray-900 shadow-none relative overflow-hidden h-[453px]">
@@ -60,7 +62,7 @@ export default function AboutCard({
           {description}
         </p>
         <a
-          href="/converter"
+          href={href}
           className="rounded-lg bg-white pointer-events-auto"
         >
           <ShinyButton>Coba Sekarang</ShinyButton>

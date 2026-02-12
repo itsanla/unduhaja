@@ -3,7 +3,7 @@ import {
   EnvelopeIcon,
 } from "@heroicons/react/24/solid";
 
-export default function Footer() {
+export default function BlogFooter() {
   const CURRENT_YEAR = new Date().getFullYear();
   const LINKS = [
     { name: "Beranda", href: "/" },
@@ -28,30 +28,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="px-4 md:px-6 lg:px-12 xl:px-16 py-10 pb-5 md:pt-10">
+    <footer className="border-t border-gray-100 px-4 md:px-6 lg:px-12 xl:px-16 py-10 pb-5 md:pt-10">
       <div className="container mx-auto flex flex-col">
-        {/* CTA Banner */}
-        <div
-          id="mulai"
-          className="mx-auto mb-5 flex w-full max-w-6xl flex-col items-center justify-center rounded-2xl bg-gray-900 p-5 py-10 md:mb-20"
-        >
-          <h2 className="text-center text-2xl font-bold text-white md:text-3xl">
-            Mulai Gunakan unduhaja.me — Gratis!
-          </h2>
-          <p className="my-3 text-center text-base text-white/80 md:w-7/12">
-            Konversi file, transkripsi audio, dan hapus background foto langsung
-            dari browser Anda. Tanpa install, tanpa daftar, tanpa biaya.
-          </p>
-          <div className="mt-2 flex w-full flex-col gap-3 md:w-fit md:flex-row">
-            <a
-              href="/converter"
-              className="rounded-lg bg-white px-6 py-3 text-center font-medium text-gray-900 transition-colors hover:bg-gray-100"
-            >
-              Coba Konversi File
-            </a>
-          </div>
-        </div>
-
         {/* Footer links */}
         <div className="flex flex-col items-center justify-between md:flex-row">
           <a

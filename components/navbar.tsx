@@ -2,153 +2,147 @@
 
 import React from "react";
 import {
-  Bars3Icon,
-  XMarkIcon,
   RectangleStackIcon,
   InformationCircleIcon,
   WrenchScrewdriverIcon,
+  NewspaperIcon,
 } from "@heroicons/react/24/solid";
+import {
+  Navbar as NavbarWrapper,
+  NavBody,
+  NavItems,
+  MobileNav,
+  NavbarLogo,
+  NavbarButton,
+  MobileNavHeader,
+  MobileNavToggle,
+  MobileNavMenu,
+} from "@/components/ui/resizable-navbar";
 
 const NAV_MENU = [
-  { name: "Beranda", icon: RectangleStackIcon, href: "/" },
-  { name: "Konversi File", icon: WrenchScrewdriverIcon, href: "/converter" },
-  { name: "Tentang", icon: InformationCircleIcon, href: "/#tentang" },
+  { name: "Beranda", icon: RectangleStackIcon, link: "/" },
+  { 
+    name: "Layanan", 
+    icon: WrenchScrewdriverIcon, 
+    link: "/#layanan",
+    dropdown: [
+      { name: "File Converter", link: "/file-converter" },
+      { name: "Audio to Text", link: "/audio-to-text" },
+      { name: "Background Remover", link: "/background-remover" },
+    ]
+  },
+  { name: "Blog", icon: NewspaperIcon, link: "/blog" },
+  { name: "Tentang", icon: InformationCircleIcon, link: "/#tentang" },
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = React.useState(false);
-  const [isScrolling, setIsScrolling] = React.useState(false);
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 960) setOpen(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  React.useEffect(() => {
-    const handleScroll = () => setIsScrolling(window.scrollY > 0);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   return (
-    <nav
-      className={`fixed top-0 z-50 w-full border-0 transition-all duration-300 ${
-        isScrolling
-          ? "bg-white/40 shadow-lg backdrop-blur-xl backdrop-saturate-200"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto flex items-center justify-between px-4 md:px-6 lg:px-12 xl:px-16 py-3">
-        <a
-          href="#"
-          className={`text-lg font-bold ${
-            isScrolling ? "text-blue-gray-900" : "text-white"
-          }`}
-        >
-          unduhaja.me
-        </a>
-
-        {/* Desktop nav */}
-        <ul
-          className={`ml-10 hidden items-center gap-6 lg:flex ${
-            isScrolling ? "text-gray-900" : "text-white"
-          }`}
-        >
-          {NAV_MENU.map(({ name, icon: Icon, href }) => (
-            <li key={name}>
-              <a
-                href={href}
-                className="flex items-center gap-2 font-medium transition-colors hover:text-orange-500"
-              >
-                <Icon className="h-5 w-5" />
-                <span>{name}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="hidden items-center gap-4 lg:flex">
-          <a
-            href="#faq"
-            className={`rounded-lg px-4 py-2 font-medium transition-colors ${
-              isScrolling
-                ? "text-gray-900 hover:bg-gray-100"
-                : "text-white hover:bg-white/10"
-            }`}
-          >
+    <NavbarWrapper>
+      {/* Desktop Navigation */}
+      <NavBody>
+        <NavbarLogo>
+          <a href="/" className="flex items-center gap-2">
+            <img
+              src="/icon.webp"
+              alt="unduhaja.me"
+              width={30}
+              height={30}
+              className="rounded-lg"
+            />
+            <span className="text-lg font-bold">
+              unduhaja.me
+            </span>
+          </a>
+        </NavbarLogo>
+        <NavItems items={NAV_MENU} />
+        <div className="flex items-center gap-4">
+          <NavbarButton variant="secondary" href="#faq">
             FAQ
-          </a>
-          <a
-            href="#mulai"
-            className={`rounded-lg px-4 py-2 font-medium ${
-              isScrolling
-                ? "bg-gray-900 text-white hover:bg-gray-800"
-                : "bg-white text-gray-900 hover:bg-gray-100"
-            }`}
-          >
-            Mulai Sekarang
-          </a>
+          </NavbarButton>
+          <NavbarButton variant="primary" href="/converter">
+            Coba Sekarang
+          </NavbarButton>
         </div>
+      </NavBody>
 
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className={`ml-auto inline-block rounded-lg p-2 lg:hidden ${
-            isScrolling
-              ? "text-gray-900 hover:bg-gray-100"
-              : "text-white hover:bg-white/10"
-          }`}
+      {/* Mobile Navigation */}
+      <MobileNav>
+        <MobileNavHeader>
+          <NavbarLogo>
+            <a href="/" className="flex items-center gap-2">
+              <img
+                src="/icon.webp"
+                alt="unduhaja.me"
+                width={30}
+                height={30}
+                className="rounded-lg"
+              />
+              <span className="text-lg font-bold text-black dark:text-white">
+                unduhaja.me
+              </span>
+            </a>
+          </NavbarLogo>
+          <MobileNavToggle
+            isOpen={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          />
+        </MobileNavHeader>
+
+        <MobileNavMenu
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
         >
-          {open ? (
-            <XMarkIcon className="h-6 w-6" />
-          ) : (
-            <Bars3Icon className="h-6 w-6" />
-          )}
-        </button>
-      </div>
-
-      {/* Mobile collapse */}
-      <div
-        className={`overflow-hidden transition-all duration-300 lg:hidden ${
-          open ? "max-h-96" : "max-h-0"
-        }`}
-      >
-        <div className="container mx-auto mt-2 rounded-lg bg-white px-6 py-5 shadow-lg">
-          <ul className="flex flex-col gap-4 text-gray-900">
-            {NAV_MENU.map(({ name, icon: Icon, href }) => (
-              <li key={name}>
+          {NAV_MENU.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <div key={`mobile-link-${idx}`} className="w-full">
                 <a
-                  href={href}
-                  className="flex items-center gap-2 font-medium hover:text-orange-500"
-                  onClick={() => setOpen(false)}
+                  href={item.link}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 text-neutral-600 dark:text-neutral-300 hover:text-orange-500"
                 >
                   <Icon className="h-5 w-5" />
-                  {name}
+                  <span>{item.name}</span>
                 </a>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6 flex items-center gap-4">
-            <a
+                {item.dropdown && (
+                  <div className="ml-7 mt-2 flex flex-col gap-2">
+                    {item.dropdown.map((dropItem, dropIdx) => (
+                      <a
+                        key={`mobile-dropdown-${idx}-${dropIdx}`}
+                        href={dropItem.link}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="text-sm text-neutral-500 dark:text-neutral-400 hover:text-orange-500"
+                      >
+                        {dropItem.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+          <div className="flex w-full flex-col gap-4 mt-4">
+            <NavbarButton
+              onClick={() => setIsMobileMenuOpen(false)}
+              variant="secondary"
               href="#faq"
-              className="rounded-lg px-4 py-2 font-medium text-gray-900 hover:bg-gray-100"
-              onClick={() => setOpen(false)}
+              className="w-full"
             >
               FAQ
-            </a>
-            <a
-              href="#mulai"
-              className="rounded-lg bg-gray-900 px-4 py-2 font-medium text-white hover:bg-gray-800"
-              onClick={() => setOpen(false)}
+            </NavbarButton>
+            <NavbarButton
+              onClick={() => setIsMobileMenuOpen(false)}
+              variant="primary"
+              href="/converter"
+              className="w-full"
             >
-              Mulai Sekarang
-            </a>
+              Coba Sekarang
+            </NavbarButton>
           </div>
-        </div>
-      </div>
-    </nav>
+        </MobileNavMenu>
+      </MobileNav>
+    </NavbarWrapper>
   );
 }

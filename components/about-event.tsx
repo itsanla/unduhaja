@@ -9,6 +9,7 @@ const EVENT_INFO = [
       "Alat untuk mengubah format file apa saja menjadi format yang diinginkan. Dokumen, gambar, hingga video bisa diubah dalam hitungan detik",
     subTitle: "File Converter",
     img: "/converter.webp",
+    href: "/file-converter",
   },
   {
     title: "Pencatat Suara Otomatis",
@@ -16,6 +17,7 @@ const EVENT_INFO = [
       "Pengguna cukup mengunggah rekaman suara, dan website kami akan otomatis mengetikkannya menjadi teks yang rapi. Sangat membantu untuk notulen rapat, transkrip wawancara, atau tugas kuliah.",
     subTitle: "Audio to Text",
     img: "/audio.webp",
+    href: "/audio-to-text",
   },
 ];
 
@@ -33,9 +35,7 @@ export default function AboutEvent() {
       </h3>
       <p className="mt-2 mb-8 w-full text-center text-lg font-normal text-gray-500 lg:max-w-4xl">
         Kami membuat sebuah website &quot;serba bisa&quot; yang menyediakan
-        alat-alat digital untuk mempermudah pekerjaan sehari-hari. Bayangkan
-        seperti memiliki pisau lipat Swiss Army, tapi untuk kebutuhan file
-        digital — dokumen, foto, dan suara. Yang membuat kami berbeda: semua
+        alat-alat digital untuk mempermudah pekerjaan sehari-hari. Di kembangkan khusus dalam mengolah dokumen, foto, dan suara. Yang membuat kami berbeda adalah semua
         proses terjadi langsung di perangkat pengguna (HP/Laptop), bukan di
         server kami. Ini artinya bekerja lebih cepat dan jauh lebih aman.
       </p>
@@ -43,7 +43,11 @@ export default function AboutEvent() {
         Cocok untuk mahasiswa, pekerja kantoran, pedagang online/UMKM, dan
         konten kreator yang butuh alat praktis tanpa ribet install aplikasi.
       </p>
-      <div className="mt-8 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+      <div id="layanan" className="w-full mt-8">
+        <p className="mb-6 text-sm font-semibold uppercase tracking-wider text-orange-500">
+          Layanan Kami
+        </p>
+        <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         {EVENT_INFO.map((props, idx) => (
           <AboutCard key={idx} {...props} />
         ))}
@@ -56,7 +60,9 @@ export default function AboutEvent() {
               before: "/rb2.webp",
               after: "/rb.webp",
             }}
+            href="/background-remover"
           />
+        </div>
         </div>
       </div>
     </section>
